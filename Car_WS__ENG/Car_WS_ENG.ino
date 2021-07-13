@@ -1,9 +1,7 @@
-/*
-ESP32-CAM Remote Control 
-*/
+// Car on ESP32-CAM 
 
-const char* ssid = "***********";
-const char* password = "***********";
+const char* ssid = "Trikamanana";
+const char* password = "timur1988";
 
 #include "esp_wifi.h"
 #include "esp_camera.h"
@@ -11,14 +9,6 @@ const char* password = "***********";
 #include "soc/soc.h"
 #include "soc/rtc_cntl_reg.h"
 
-//
-// WARNING!!! Make sure that you have either selected ESP32 Wrover Module,
-//            or another board which has PSRAM enabled
-//
-
-// Select camera model
-//#define CAMERA_MODEL_WROVER_KIT
-//#define CAMERA_MODEL_M5STACK_PSRAM
 #define CAMERA_MODEL_AI_THINKER
 
 #if defined(CAMERA_MODEL_WROVER_KIT)
@@ -110,7 +100,7 @@ void initServo()
 
 void setup() 
 {
-  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); // prevent brownouts by silencing them
+  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
   
   Serial.begin(115200);
   Serial.setDebugOutput(true);
@@ -137,7 +127,6 @@ void setup()
   config.pin_reset = RESET_GPIO_NUM;
   config.xclk_freq_hz = 20000000;
   config.pixel_format = PIXFORMAT_JPEG;
-  //init with high specs to pre-allocate larger buffers
   if(psramFound()){
     config.frame_size = FRAMESIZE_QVGA;
     config.jpeg_quality = 10;
@@ -148,20 +137,17 @@ void setup()
     config.fb_count = 1;
   }
 
-  // camera init
   esp_err_t err = esp_camera_init(&config);
   if (err != ESP_OK) {
     Serial.printf("Camera init failed with error 0x%x", err);
     return;
   }
 
-  //drop down frame size for higher initial frame rate
   sensor_t * s = esp_camera_sensor_get();
   s->set_framesize(s, FRAMESIZE_QVGA);
   s->set_vflip(s, 1);
   s->set_hmirror(s, 1);
 
-  // Remote Control Car
   initMotors();
   initServo();
   
@@ -179,14 +165,7 @@ void setup()
   {
       delay(500);
       if ((StartTime+10000) < millis()) break;
-  } 
-
-  /*
-  int8_t power;
-  esp_wifi_set_max_tx_power(20);
-  esp_wifi_get_max_tx_power(&power);
-  Serial.printf("wifi power: %d \n",power); 
-  */
+  }
   
   startCameraServer();
 
@@ -204,7 +183,7 @@ void setup()
     Serial.print(WiFi.softAPIP());
     Serial.println("' to connect");
     char* apssid = "ESP32-CAM";
-    char* appassword = "12345678";         //AP password require at least 8 characters.
+    char* appassword = "12345678";         
     WiFi.softAP((WiFi.softAPIP().toString()+"_"+(String)apssid).c_str(), appassword);    
   }
 
@@ -218,7 +197,6 @@ void setup()
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
   delay(1000);
   Serial.printf("RSSi: %ld dBm\n",WiFi.RSSI()); 
 }
