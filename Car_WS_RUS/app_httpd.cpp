@@ -754,14 +754,14 @@ document.addEventListener('DOMContentLoaded', function() {
             window.stop(), m.innerHTML = 'Вкл.стрим'
         },
         q = () => {
-            j.src = `${c+':81'}/stream`, f(k), m.innerHTML = 'Выкл.стрим'
+            j.src = `${c+':81'}/stream`, f(k), m.innerHTML = 'Stop Stream'
         };
     l.onclick = () => {
         p(), j.src = `${c}/capture?_cb=${Date.now()}`, f(k)
     }, o.onclick = () => {
         p(), e(k)
     }, m.onclick = () => {
-        const B = 'Stop Stream' === m.innerHTML;
+        const B = 'Выкл.стрим' === m.innerHTML;
         B ? p() : q()
     }, n.onclick = () => {
         b(n)
