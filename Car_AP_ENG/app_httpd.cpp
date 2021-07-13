@@ -2,7 +2,7 @@
 #include <esp32-hal-ledc.h>
 int speed = 255;
 int speedBalansR = 0;  // If the car deviates to the left, then reduce the speed of the right motor.
-int speedBalansL = 15; // If the car deviates to the right, then reduce the speed of the left motor.
+int speedBalansL = 0; // If the car deviates to the right, then reduce the speed of the left motor.
 int noStop = 0;
 
 #include "esp_http_server.h"
