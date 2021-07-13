@@ -1,7 +1,7 @@
 // Машинка на ESP32-CAM 
 
 const char* ssid = "Car";
-const char* password = "758965215kji";
+const char* password = "123456789";
 
 #include "esp_wifi.h"
 #include "esp_camera.h"
