@@ -751,7 +751,7 @@ document.addEventListener('DOMContentLoaded', function() {
         n = document.getElementById('face_enroll'),
         o = document.getElementById('close-stream'),
         p = () => {
-            window.stop(), m.innerHTML = 'Выкл.стрим'
+            window.stop(), m.innerHTML = 'Start Stream'
         },
         q = () => {
             j.src = `${c+':81'}/stream`, f(k), m.innerHTML = 'Выкл.стрим'
