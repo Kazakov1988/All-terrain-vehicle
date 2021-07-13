@@ -5,14 +5,11 @@ int speedBalansR = 0;  // If the car deviates to the left, then reduce the speed
 int speedBalansL = 15; // If the car deviates to the right, then reduce the speed of the left motor.
 int noStop = 0;
 
-
 #include "esp_http_server.h"
 #include "esp_timer.h"
 #include "esp_camera.h"
 #include "img_converters.h"
 #include "Arduino.h"
-
-//#include "dl_lib.h"
 
 typedef struct {
   httpd_req_t *req;
@@ -232,8 +229,7 @@ static esp_err_t cmd_handler(httpd_req_t *req)
     Serial.println("quality");
     res = s->set_quality(s, val);
   }
-  //Remote Control Car
-  //Don't use channel 1 and channel 2
+  
   else if (!strcmp(variable, "flash"))
   {
     ledcWrite(7, val);
@@ -268,9 +264,6 @@ static esp_err_t cmd_handler(httpd_req_t *req)
       Serial.println("TurnLeft");
       ledcWrite(3, 0);
       ledcWrite(5, 0);
-      //if      (actstate == fwd) { ledcWrite(4,speed); ledcWrite(6,    0); }
-      //else if (actstate == rev) { ledcWrite(4,    0); ledcWrite(6,speed); }
-      //else                      { ledcWrite(4,speed); ledcWrite(6,speed); }
       ledcWrite(4, speed - speedBalansR);
       ledcWrite(6, speed - speedBalansL);
 
@@ -288,9 +281,6 @@ static esp_err_t cmd_handler(httpd_req_t *req)
       Serial.println("TurnRight");
       ledcWrite(4, 0);
       ledcWrite(6, 0);
-      //if      (actstate == fwd) { ledcWrite(3,    0); ledcWrite(5,speed); }
-      //else if (actstate == rev) { ledcWrite(3,speed); ledcWrite(5,    0); }
-      //else                      { ledcWrite(3,speed); ledcWrite(5,speed); }
       ledcWrite(3, speed - speedBalansR);
       ledcWrite(5, speed - speedBalansL);
 
@@ -646,15 +636,15 @@ select{
           
 </style>
 </head>
-<body>
-<figure>
+  <body>
+    <figure>
       <div id="stream-container" class="image-container hidden">
         <div class="close" id="close-stream">×</div>
         <img id="stream" src="">
       </div>
-</figure>
-<section class="main">
-   <section id="buttons">
+    </figure>
+    <section class="main">
+    <section id="buttons">
       <table>
          <tr>
             <td align="center"><button id="get-still">Get Still</button></td>
@@ -699,9 +689,9 @@ select{
             <td align="center" colspan="2"><input type="range" id="framesize" min="0" max="6" value="5" onchange="try{fetch(document.location.origin+'/control?var=framesize&val='+this.value);}catch(e){}"></td>
          </tr>
       </table>
-   </section>
-</section>
-        <script>
+    </section>
+    </section>
+    <script>
 document.addEventListener('DOMContentLoaded', function() {
     function b(B) {
         let C;
@@ -806,34 +796,34 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
         
-document.addEventListener('keypress', function(event) {
+document.addEventListener('keypress', function(event) {                    // Keyboard control support
     switch (event.charCode) {
         case 119:
             fetch(document.location.origin + '/control?var=car&val=1');
-            break // Forward - W
+            break                                                          // Forward - W
         case 115:
             fetch(document.location.origin + '/control?var=car&val=5');
-            break // Backward - S
+            break                                                          // Backward - S
         case 97:
             fetch(document.location.origin + '/control?var=car&val=2');
-            break // Turn left - A
+            break                                                          // Turnleft - A
         case 100:
             fetch(document.location.origin + '/control?var=car&val=4');
-            break // Turn right - D
+            break                                                          // Turnright - D
         case 112:
             fetch(document.location.origin + '/control?var=car&val=3');
-            break // Stop - P
+            break                                                          // Stop - P
         case 108:
             fetch(document.location.origin + '/control?var=flash&val=255');
-            break // Flash On - L
+            break                                                          // Flash On - L
         case 107:
             fetch(document.location.origin + '/control?var=flash&val=0');
-            break // Flash Off - K
+            break                                                          // Flash Off - K
     }
 });
         
-</script>
-</body>
+    </script>
+  </body>
 </html>
 )rawliteral";
 

@@ -52,7 +52,7 @@ void initServo(){
 }
 
 void setup(){
-  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); // prevent brownouts by silencing them
+  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); 
 
   Serial.begin(115200);
   Serial.setDebugOutput(true);
@@ -79,7 +79,6 @@ void setup(){
   config.pin_reset = RESET_GPIO_NUM;
   config.xclk_freq_hz = 20000000;
   config.pixel_format = PIXFORMAT_JPEG;
-  //init with high specs to pre-allocate larger buffers
   if (psramFound()){
     config.frame_size = FRAMESIZE_QVGA;
     config.jpeg_quality = 10;
@@ -90,20 +89,17 @@ void setup(){
     config.fb_count = 1;
   }
 
-  // camera init
   esp_err_t err = esp_camera_init(&config);
   if (err != ESP_OK) {
     Serial.printf("Camera init failed with error 0x%x", err);
     return;
   }
 
-  //drop down frame size for higher initial frame rate
   sensor_t * s = esp_camera_sensor_get();
   s->set_framesize(s, FRAMESIZE_QVGA);
   s->set_vflip(s, 1);
   s->set_hmirror(s, 1);
 
-  // Remote Control Car
   initMotors();
   initServo();
 
@@ -126,7 +122,6 @@ void setup(){
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
   delay(1000);
   Serial.printf("RSSi: %ld dBm\n", WiFi.RSSI());
 }
