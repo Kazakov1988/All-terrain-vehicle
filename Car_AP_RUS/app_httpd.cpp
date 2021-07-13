@@ -650,10 +650,10 @@ select{
             <td align="center"><button id="get-still">Фото</button></td>
             </td>
             <td align="center"><button id="restart" onclick="fetch(document.location.origin+'/control?var=car&val=6');">Перезагрузка</button></td>
-            <td align="center"><button id="toggle-stream">Начать стрим</button></td>
+            <td align="center"><button id="toggle-stream">Вкл.стрим</button></td>
          </tr>
          <tr>
-            <td><input type="checkbox" id="nostop" onclick="var noStop=0;if (this.checked) noStop=1;fetch(document.location.origin+'/control?var=nostop&val='+noStop);">Без остановки</td>
+            <td><input type="checkbox" id="nostop" onclick="var noStop=0;if (this.checked) noStop=1;fetch(document.location.origin+'/control?var=nostop&val='+noStop);">Без ост.</td>
             <td align="center"><button id="forward" onclick="fetch(document.location.origin+'/control?var=car&val=1');">Вперёд</button></td>
             <td></td>
          </tr>
@@ -751,10 +751,10 @@ document.addEventListener('DOMContentLoaded', function() {
         n = document.getElementById('face_enroll'),
         o = document.getElementById('close-stream'),
         p = () => {
-            window.stop(), m.innerHTML = 'Остановить стрим'
+            window.stop(), m.innerHTML = 'Выкл.стрим'
         },
         q = () => {
-            j.src = `${c+':81'}/stream`, f(k), m.innerHTML = 'Остановить стрим'
+            j.src = `${c+':81'}/stream`, f(k), m.innerHTML = 'Выкл.стрим'
         };
     l.onclick = () => {
         p(), j.src = `${c}/capture?_cb=${Date.now()}`, f(k)
