@@ -647,7 +647,7 @@ select{
     <section id="buttons">
       <table>
          <tr>
-            <td align="center"><button id="get-still">Get Still</button></td>
+            <td align="center"><button id="get-still">Photo</button></td>
             </td>
             <td align="center"><button id="restart" onclick="fetch(document.location.origin+'/control?var=car&val=6');">Restart</button></td>
             <td align="center"><button id="toggle-stream">Start Stream</button></td>
