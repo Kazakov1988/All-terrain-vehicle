@@ -2,7 +2,7 @@
 #include <esp32-hal-ledc.h>
 int speed = 255;
 int speedBalansR = 0;  // Если автомобиль отклоняется влево, уменьшите скорость правого мотора.
-int speedBalansL = 0; // Если автомобиль отклоняется вправо, уменьшите скорость левого мотора.
+int speedBalansL = 15; // Если автомобиль отклоняется вправо, уменьшите скорость левого мотора.
 int noStop = 0;
 
 #include "esp_http_server.h"
@@ -754,7 +754,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.stop(), m.innerHTML = 'Вкл.стрим'
         },
         q = () => {
-            j.src = `${c+':81'}/stream`, f(k), m.innerHTML = 'Stop Stream'
+            j.src = `${c+':81'}/stream`, f(k), m.innerHTML = 'Выкл.стрим'
         };
     l.onclick = () => {
         p(), j.src = `${c}/capture?_cb=${Date.now()}`, f(k)
