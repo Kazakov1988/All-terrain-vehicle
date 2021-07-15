@@ -1,4 +1,4 @@
-// Car on ESP32-CAM 
+// Машинка на ESP32-CAM 
 
 const char* ssid = "***********";
 const char* password = "***********";
