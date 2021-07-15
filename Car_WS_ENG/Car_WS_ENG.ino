@@ -1,7 +1,7 @@
 // Car on ESP32-CAM 
 
-const char* ssid = "Trikamanana";
-const char* password = "timur1988";
+const char* ssid = "**********";
+const char* password = "**********";
 
 #include "esp_wifi.h"
 #include "esp_camera.h"
