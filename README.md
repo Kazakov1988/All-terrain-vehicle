@@ -1,12 +1,19 @@
 # All-terrain-vehicle
 
 14.07.2021.
+Видео - https://youtu.be/FoRCllWxfIA
+Страница проекта - https://arduino-lab.ru/vezdehod-na-guseniczah-na-esp-32-cam-s-upravleniem-cherez-wi-fi-i-po-internetu/
 
 Есть четыре вида скеча:
 - Car_AP_ENG - машинка становится точкой доступа, интерйфейс на английском языке.
 - Car_AP_RUS - машинка становится точкой доступа, интерйфейс на русском языке.
 - Car_WS_ENG - машинка подключается к другой точке доступа, интерйейс на английском языке. 
 - Car_WS_RUS - машинка подключается к другой точке доступа, интерйейс на русском языке. 
+
+******
+
+Video - https://youtu.be/FoRCllWxfIA
+Project page - https://arduino-lab.ru/vezdehod-na-guseniczah-na-esp-32-cam-s-upravleniem-cherez-wi-fi-i-po-internetu/
 
 There are four types of sketches:
 - Car_AP_ENG - the car becomes an access point, the interface is in English.
