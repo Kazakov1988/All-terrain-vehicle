@@ -2,7 +2,7 @@
 
 14.07.2021. <br>
 Видео - https://youtu.be/FoRCllWxfIA <br>
-Страница проекта - https://arduino-lab.ru/vezdehod-na-guseniczah-na-esp-32-cam-s-upravleniem-cherez-wi-fi-i-po-internetu/ <br>
+Страница проекта - https://electra-hobby.com/vezdehod-na-guseniczah-na-esp-32-cam-s-upravleniem-cherez-wi-fi-i-po-internetu/ <br>
 
 Есть четыре вида скеча:
 - Car_AP_ENG - машинка становится точкой доступа, интерйфейс на английском языке.
@@ -14,7 +14,7 @@
 
 14.07.2021. <br>
 Video - https://youtu.be/FoRCllWxfIA <br>
-Project page - https://arduino-lab.ru/vezdehod-na-guseniczah-na-esp-32-cam-s-upravleniem-cherez-wi-fi-i-po-internetu/ <br>
+Project page - https://electra-hobby.com/vezdehod-na-guseniczah-na-esp-32-cam-s-upravleniem-cherez-wi-fi-i-po-internetu/ <br>
 
 There are four types of sketches:
 - Car_AP_ENG - the car becomes an access point, the interface is in English.
