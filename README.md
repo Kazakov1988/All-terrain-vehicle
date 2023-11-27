@@ -4,11 +4,10 @@
 Видео - https://youtu.be/FoRCllWxfIA <br>
 Страница проекта - https://electra-hobby.com/vezdehod-na-guseniczah-na-esp-32-cam-s-upravleniem-cherez-wi-fi-i-po-internetu/ <br>
 
-Есть четыре вида скеча:
-- Car_AP_ENG - машинка становится точкой доступа, интерйфейс на английском языке.
-- Car_AP_RUS - машинка становится точкой доступа, интерйфейс на русском языке.
-- Car_WS_ENG - машинка подключается к другой точке доступа, интерйейс на английском языке. 
-- Car_WS_RUS - машинка подключается к другой точке доступа, интерйейс на русском языке. 
+Эта радиоуправляемая машиека можетподключаться к существующей точке доступа или создавать свою собственную.
+Доступные языки интерфейса (пока что): русский и английский.
+
+Перед сборкой отредактируйте Config.h под свои настройки
 
 ******
 
@@ -16,8 +15,7 @@
 Video - https://youtu.be/FoRCllWxfIA <br>
 Project page - https://electra-hobby.com/vezdehod-na-guseniczah-na-esp-32-cam-s-upravleniem-cherez-wi-fi-i-po-internetu/ <br>
 
-There are four types of sketches:
-- Car_AP_ENG - the car becomes an access point, the interface is in English.
-- Car_AP_RUS - the car becomes an access point, the interface is in Russian.
-- Car_WS_ENG - the car is connected to another access point, the interface is in English.
-- Car_WS_RUS - the car is connected to another access point, interface in Russian.
+This remote-driven car can connect to existing wifi access point or create new one.
+Available interface lanuages (for now): russian and english.
+
+Please edit Config.h with your settings before build
