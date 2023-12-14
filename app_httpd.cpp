@@ -145,6 +145,15 @@ static esp_err_t stream_handler(httpd_req_t *req) {
 enum state {fwd, rev, stp};
 state actstate = stp;
 
+/**
+ * motor driver pins state memo (N - 1..255) :
+ *            pin 1 | pin 2 |
+ * ---------+-------+-------+
+ *  forward |   N   |   0   |
+ *  reverse |   0   |   N   |
+ *  brake   |   N   |   N   |
+ *  stop    |   0   |   0   |
+ */
 static esp_err_t cmd_handler(httpd_req_t *req)
 {
   char*  buf;
@@ -205,15 +214,15 @@ static esp_err_t cmd_handler(httpd_req_t *req)
     if (val == 1) {
       Serial.println(MSG_MOVE_FORWARD);
       actstate = fwd;
-      ledcWrite(LEDC_LEFT_MOTOR_IN1,  0);
-      ledcWrite(LEDC_LEFT_MOTOR_IN2,  speed - ADJ_SPEED_R);
+      ledcWrite(LEDC_LEFT_MOTOR_IN1,  speed - ADJ_SPEED_R);
+      ledcWrite(LEDC_LEFT_MOTOR_IN2, 0);
       ledcWrite(LEDC_RIGHT_MOTOR_IN1, speed - ADJ_SPEED_L);
       ledcWrite(LEDC_RIGHT_MOTOR_IN2, 0);
       delay(200);
     } else if (val == 2) {
       Serial.println(MSG_TURN_LEFT);
-      ledcWrite(LEDC_LEFT_MOTOR_IN1, 0);
-      ledcWrite(LEDC_LEFT_MOTOR_IN2, speed - ADJ_SPEED_R);
+      ledcWrite(LEDC_LEFT_MOTOR_IN1, speed - ADJ_SPEED_R);
+      ledcWrite(LEDC_LEFT_MOTOR_IN2, 0);
       ledcWrite(LEDC_RIGHT_MOTOR_IN1, 0);
       ledcWrite(LEDC_RIGHT_MOTOR_IN2, speed - ADJ_SPEED_L);
       delay(100);
@@ -226,8 +235,8 @@ static esp_err_t cmd_handler(httpd_req_t *req)
       ledcWrite(LEDC_RIGHT_MOTOR_IN2, 0);
     } else if (val == 4) {
       Serial.println(MSG_TURN_RIGHT);
-      ledcWrite(LEDC_LEFT_MOTOR_IN1,  speed - ADJ_SPEED_R);
-      ledcWrite(LEDC_LEFT_MOTOR_IN2, 0);
+      ledcWrite(LEDC_LEFT_MOTOR_IN1, 0);
+      ledcWrite(LEDC_LEFT_MOTOR_IN2,  speed - ADJ_SPEED_R);
       ledcWrite(LEDC_RIGHT_MOTOR_IN1, speed - ADJ_SPEED_L);
       ledcWrite(LEDC_RIGHT_MOTOR_IN2, 0);
       delay(100);
