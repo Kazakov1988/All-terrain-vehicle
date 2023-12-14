@@ -106,12 +106,11 @@ void setup() {
   if (WiFi.status() == WL_CONNECTED) {
     Serial.println("");
     Serial.println(MSG_WIFI_CONNECTED);
-    Serial.printf(MSG_CAMERA_READY, WiFi.localIP());
+    Serial.printf(MSG_CAMERA_READY, WiFi.localIP().toString());
   } else {
     Serial.println("");
     Serial.println(MSG_WIFI_DISCONNECTED);
-    Serial.printf(MSG_CAMERA_READY, WiFi.softAPIP());
-    Serial.println();
+    Serial.printf(MSG_CAMERA_READY, WiFi.softAPIP().toString());
     WiFi.softAP((WiFi.softAPIP().toString()+"_"+(String)WIFI_SOFTAP_SSID).c_str(), WIFI_SOFTAP_PASS);
   }
 #else
