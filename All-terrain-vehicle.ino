@@ -90,12 +90,7 @@ void setup() {
   initCamera();
   initFlashLed();
 
-#ifndef WIFI_MODE_CLIENT
-  WiFi.softAP(ssid, password);
-  IPAddress miIP = WiFi.softAPIP();
-  Serial.print(MSG_AP_IP_ADDRESS);
-  Serial.println(miIP); // 192.168.4.1
-#else
+#if WIFI_MODE_CLIENT
   Serial.println("SSID: " + (String) WIFI_CONNECT_SSID);
   Serial.println("Password: " + (String) WIFI_CONNECT_PASS);
 
@@ -119,6 +114,10 @@ void setup() {
     Serial.println();
     WiFi.softAP((WiFi.softAPIP().toString()+"_"+(String)WIFI_SOFTAP_SSID).c_str(), WIFI_SOFTAP_PASS);
   }
+#else
+  WiFi.softAP(WIFI_SOFTAP_SSID, WIFI_SOFTAP_PASS);
+  IPAddress miIP = WiFi.softAPIP();
+  Serial.printf(MSG_AP_IP_ADDRESS, miIP.toString());
 #endif
 
   startCameraServer();
