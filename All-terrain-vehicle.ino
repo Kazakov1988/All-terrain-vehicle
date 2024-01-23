@@ -86,9 +86,9 @@ void setup() {
   Serial.setDebugOutput(SERIAL_DEBUG);
   Serial.println();
 
+  initCamera();
   initMotors();
   initServo();
-  initCamera();
   initFlashLed();
 
 #if WIFI_MODE_CLIENT
