@@ -79,7 +79,8 @@ void initCamera() {
 }
 
 void setup() {
-  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
+  // bug workaround, see https://github.com/espressif/arduino-esp32/issues/863
+  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); // disable brownout detector
 
   Serial.begin(SERIAL_SPEED);
   Serial.setDebugOutput(SERIAL_DEBUG);
