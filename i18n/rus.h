@@ -1,7 +1,7 @@
 #include "html/rus.h"
 
 #define MSG_CAMERA_READY "Камера готова! Используйте 'http://%s' для подключения\n"
-#define MSG_CAMERA_INIT_FAIL "Инициализация камеры завершилась ошибкой 0x%x"
+#define MSG_CAMERA_INIT_FAIL "Инициализация камеры завершилась ошибкой 0x%x\n"
 #define MSG_CAMERA_CAPTURE_FAIL "Не удалось захватить камеру"
 #define MSG_CAMERA_JPEG_COMP_FAIL "Сбой сжатия JPEG"
 

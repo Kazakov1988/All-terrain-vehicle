@@ -1,7 +1,7 @@
 #include "html/eng.h"
 
 #define MSG_CAMERA_READY "Camera Ready! Use 'http://%s' to connect\n"
-#define MSG_CAMERA_INIT_FAIL "Camera init failed with error 0x%x"
+#define MSG_CAMERA_INIT_FAIL "Camera init failed with error 0x%x\n"
 #define MSG_CAMERA_CAPTURE_FAIL "Camera capture failed"
 #define MSG_CAMERA_JPEG_COMP_FAIL "JPEG compression failed"
 

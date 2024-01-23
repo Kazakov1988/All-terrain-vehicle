@@ -195,7 +195,7 @@ static esp_err_t cmd_handler(httpd_req_t *req)
     Serial.println("framesize");
     if (s->pixformat == PIXFORMAT_JPEG) res = s->set_framesize(s, (framesize_t)val);
   } else if (!strcmp(variable, "quality")) {
-    Serial.println("quality");
+    Serial.printf("set quality=%d\n", val);
     res = s->set_quality(s, val);
   } else if (!strcmp(variable, "flash")) {
     ledcWrite(LEDC_FLASH_CHAN, val);
