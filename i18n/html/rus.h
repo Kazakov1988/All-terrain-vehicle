@@ -339,7 +339,7 @@ select{
          </tr>
          <tr>
             <td>Серво</td>
-            <td align="center" colspan="2"><input type="range" id="servo" min="325" max="650" value="487" onchange="try{fetch(document.location.origin+'/control?var=servo&val='+this.value);}catch(e){}"></td>
+            <td align="center" colspan="2"><input type="range" id="servo" min="-45" max="45" value="0" step="5" onchange="try{fetch(document.location.origin+'/control?var=servo&val='+this.value);}catch(e){}"></td>
          </tr>
          <tr>
             <td>Качество</td>

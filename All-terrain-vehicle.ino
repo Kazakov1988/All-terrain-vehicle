@@ -6,6 +6,7 @@
 #include "Config.h"
 
 void startCameraServer();
+void setServoAngle(int angle);
 
 void printLedcConfig(const char *stage) {
   const char *hints[16] = { NULL };
@@ -48,9 +49,9 @@ void initMotors() {
 
 void initServo() {
   // typical: 50 Hz PWM, 16-bit resolution
-  // acceptable range - from 3250 to 6500.
   ledcSetup(LEDC_SERVO_CHAN, LEDC_SERVO_PWM_FREQ, LEDC_SERVO_PWM_RES);
   ledcAttachPin(PIN_SERVO, LEDC_SERVO_CHAN);
+  setServoAngle(0);
 }
 
 void initFlashLed() {

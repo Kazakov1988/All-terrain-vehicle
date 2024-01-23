@@ -14,6 +14,25 @@ int noStop = 0;
 static int framerate = CAMERA_DEFAULT_FRAMERATE;
 static int interframe_delay = 1000 / CAMERA_DEFAULT_FRAMERATE;
 
+/* expected servo model: SG90 with 90 or 180* full angle
+ * control frequency - 50Hz (period - 20ms)
+ * min/max control impulse width - 1 to 2ms
+ * min/max acceptable duty cycle with @ 16bit pwm res ~ 3250/6550
+ * neitral servo position duty @ 16bit pwm res ~ 4900
+ */
+void setServoAngle(int angle) {
+  static const uint16_t min_duty = 3250;
+  static const uint16_t med_duty = 4900;
+  static const uint16_t max_duty = 6550;
+  static const uint16_t deg_duty = (max_duty - min_duty) / SERVO_FULL_ANGLE; /* cycles for 1 degree */
+  /* min/max reasonable angle - -45 to +45* (encoded as 0/90*) */
+  if (angle >  45) angle =  45;
+  if (angle < -45) angle = -45;
+  uint16_t duty = med_duty + (deg_duty * angle);
+  Serial.printf("set servo: angle=%d, duty=%d, chan=%d\n", angle, duty, LEDC_SERVO_CHAN);
+  ledcWrite(LEDC_SERVO_CHAN, duty);
+}
+
 typedef struct {
   httpd_req_t *req;
   size_t len;
@@ -216,10 +235,7 @@ static esp_err_t cmd_handler(httpd_req_t *req)
   } else if (!strcmp(variable, "nostop")) {
     noStop = val;
   } else if (!strcmp(variable, "servo")) {
-    // 3250, 4875, 6500
-    if      (val > 650) val = 650;
-    else if (val < 325) val = 325;
-    ledcWrite(LEDC_SERVO_CHAN, 10 * val);
+    setServoAngle(val);
   } else if (!strcmp(variable, "car")) {
     if (val == 1) {
       Serial.println(MSG_MOVE_FORWARD);

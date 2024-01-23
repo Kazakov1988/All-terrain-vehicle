@@ -41,6 +41,11 @@
 #define CAMERA_DEFAULT_QUALITY   12 /* acceptable range: 10..63 */
 #define CAMERA_DEFAULT_FRAMERATE 15 /* acceptable range: 5 .. 50 */
 
+// Servo settings
+// ---------------------------------
+
+#define SERVO_FULL_ANGLE 180
+
 /* !!! don't edit below this line unless know what you doing !!! */
 
 // camera gpio settings
@@ -80,7 +85,7 @@
 
 #define LEDC_SERVO_PWM_FREQ 50 /* Hz */
 #define LEDC_SERVO_PWM_RES  16 /* bits */
-#define LEDC_SERVO_CHAN 8
+#define LEDC_SERVO_CHAN 2
 
 // pins settings
 // ---------------------------------
