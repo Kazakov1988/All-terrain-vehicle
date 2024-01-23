@@ -165,6 +165,12 @@ void setup() {
 }
 
 void loop() {
+  uint8_t sec = 0;
   delay(1000);
-  Serial.printf("RSSi: %ld dBm\n", WiFi.RSSI());
+  if (sec >= 10) {
+    Serial.printf("RSSi: %ld dBm\n", WiFi.RSSI());
+    sec = 0;
+  } else {
+    sec++;
+  }
 }
