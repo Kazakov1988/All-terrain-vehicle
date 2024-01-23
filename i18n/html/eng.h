@@ -349,6 +349,10 @@ select{
             <td>Resolution</td>
             <td align="center" colspan="2"><input type="range" id="framesize" min="0" max="6" value="5" onchange="try{fetch(document.location.origin+'/control?var=framesize&val='+this.value);}catch(e){}"></td>
          </tr>
+         <tr>
+            <td>Framerate</td>
+            <td align="center" colspan="2"><input type="range" id="framerate" min="5" max="50" value="15" step="5" onchange="try{fetch(document.location.origin+'/control?var=framerate&val='+this.value);}catch(e){}"></td>
+         </tr>
       </table>
     </section>
     </section>

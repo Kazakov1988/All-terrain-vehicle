@@ -11,6 +11,9 @@ int noStop = 0;
 #include "Arduino.h"
 #include "Config.h"
 
+static int framerate = CAMERA_DEFAULT_FRAMERATE;
+static int interframe_delay = 1000 / CAMERA_DEFAULT_FRAMERATE;
+
 typedef struct {
   httpd_req_t *req;
   size_t len;
@@ -136,6 +139,7 @@ static esp_err_t stream_handler(httpd_req_t *req) {
                   (uint32_t)(_jpg_buf_len),
                   (uint32_t)frame_time, 1000.0 / (uint32_t)frame_time
                  );
+    delay(interframe_delay);
   }
 
   last_frame = 0;
@@ -199,6 +203,12 @@ static esp_err_t cmd_handler(httpd_req_t *req)
     res = s->set_quality(s, val);
   } else if (!strcmp(variable, "flash")) {
     ledcWrite(LEDC_FLASH_CHAN, val);
+  } else if (!strcmp(variable, "framerate")) {
+    if      (val > 50) val = 50;
+    else if (val <  5) val = 5;
+    framerate = val;
+    interframe_delay = 1000 / val;
+    Serial.printf("set framerate=%d, interframe_delay=%d\n", val, interframe_delay);
   } else if (!strcmp(variable, "speed")) {
     if      (val > 255) val = 255;
     else if (val <   0) val = 0;

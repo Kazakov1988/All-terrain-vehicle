@@ -39,6 +39,7 @@
 
 #define CAMERA_DEFAULT_FRAMESIZE FRAMESIZE_QVGA /* 320x240 */
 #define CAMERA_DEFAULT_QUALITY   12 /* acceptable range: 10..63 */
+#define CAMERA_DEFAULT_FRAMERATE 15 /* acceptable range: 5 .. 50 */
 
 /* !!! don't edit below this line unless know what you doing !!! */
 
