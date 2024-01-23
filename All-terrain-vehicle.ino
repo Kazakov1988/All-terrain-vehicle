@@ -7,12 +7,37 @@
 
 void startCameraServer();
 
+void printLedcConfig(const char *stage) {
+  const char *hints[16] = { NULL };
+  const char *hint = NULL;
+  memset(hints, 0x0, sizeof(hints));
+  hints[LEDC_LEFT_MOTOR_IN1] = "left motor in1";
+  hints[LEDC_LEFT_MOTOR_IN2] = "left motor in1";
+  hints[LEDC_RIGHT_MOTOR_IN1] = "right motor in1";
+  hints[LEDC_RIGHT_MOTOR_IN2] = "right motor in1";
+  hints[LEDC_FLASH_CHAN] = "flash";
+  hints[LEDC_SERVO_CHAN] = "servo";
+  Serial.printf("--- ledc config: %s\n", stage);
+  for (uint8_t chan = 0; chan < 16; chan++) {
+    hint = hints[chan] ? hints[chan] : "not used";
+    Serial.printf("chan #%2d: duty=%d, freq=%d // %s\n",
+      chan, ledcRead(chan), ledcReadFreq(chan), hint);
+  }
+  Serial.println("---------------------------");
+  Serial.println("");
+}
+
 void initMotors() {
+  uint32_t freq = 0;
   /* typical: 2000 Hz PWM, 8-bit resolution */
-  ledcSetup(LEDC_LEFT_MOTOR_IN1,  LEDC_MOTORS_PWM_FREQ, LEDC_MOTORS_PWM_RES);
-  ledcSetup(LEDC_LEFT_MOTOR_IN2,  LEDC_MOTORS_PWM_FREQ, LEDC_MOTORS_PWM_RES);
-  ledcSetup(LEDC_RIGHT_MOTOR_IN1, LEDC_MOTORS_PWM_FREQ, LEDC_MOTORS_PWM_RES);
-  ledcSetup(LEDC_RIGHT_MOTOR_IN2, LEDC_MOTORS_PWM_FREQ, LEDC_MOTORS_PWM_RES);
+  freq = ledcSetup(LEDC_LEFT_MOTOR_IN1,  LEDC_MOTORS_PWM_FREQ, LEDC_MOTORS_PWM_RES);
+  Serial.printf("ledc chan#%d setup: ret=%d\n", LEDC_LEFT_MOTOR_IN1, freq);
+  freq = ledcSetup(LEDC_LEFT_MOTOR_IN2,  LEDC_MOTORS_PWM_FREQ, LEDC_MOTORS_PWM_RES);
+  Serial.printf("ledc chan#%d setup: ret=%d\n", LEDC_LEFT_MOTOR_IN2, freq);
+  freq = ledcSetup(LEDC_RIGHT_MOTOR_IN1, LEDC_MOTORS_PWM_FREQ, LEDC_MOTORS_PWM_RES);
+  Serial.printf("ledc chan#%d setup: ret=%d\n", LEDC_RIGHT_MOTOR_IN1, freq);
+  freq = ledcSetup(LEDC_RIGHT_MOTOR_IN2, LEDC_MOTORS_PWM_FREQ, LEDC_MOTORS_PWM_RES);
+  Serial.printf("ledc chan#%d setup: ret=%d\n", LEDC_RIGHT_MOTOR_IN2, freq);
 
   ledcAttachPin(PIN_LEFT_MOTOR_IN1, LEDC_LEFT_MOTOR_IN1);
   ledcAttachPin(PIN_LEFT_MOTOR_IN2, LEDC_LEFT_MOTOR_IN2);
@@ -29,8 +54,10 @@ void initServo() {
 }
 
 void initFlashLed() {
+  uint32_t freq = 0;
   // typical: 5 kHz, 8-bit resolution
-  ledcSetup(LEDC_FLASH_CHAN, LEDC_FLASH_PWM_FREQ, LEDC_FLASH_PWM_RES);
+  freq = ledcSetup(LEDC_FLASH_CHAN, LEDC_FLASH_PWM_FREQ, LEDC_FLASH_PWM_RES);
+  Serial.printf("ledc chan#%d setup: ret=%d\n", LEDC_FLASH_CHAN, freq);
   ledcAttachPin(PIN_FLASH_LED, LEDC_FLASH_CHAN);
 }
 
@@ -90,6 +117,10 @@ void setup() {
   initMotors();
   initServo();
   initFlashLed();
+
+#ifdef SERIAL_DEBUG
+  printLedcConfig("final ledc config:");
+#endif
 
 #if WIFI_MODE_CLIENT
   Serial.println("SSID: " + (String) WIFI_CONNECT_SSID);
